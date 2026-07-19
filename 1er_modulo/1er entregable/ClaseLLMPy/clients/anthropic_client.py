@@ -1,5 +1,4 @@
 import asyncio
-from anthropic import AsyncAnthropic, APIConnectionError, APITimeoutError, RateLimitError
 from schemas import ChatMessage, ModelResponse, GenerationConfig
 from config import ANTHROPIC_API_KEY
 from clients.base import BaseLLMCLient
