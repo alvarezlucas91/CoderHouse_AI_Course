@@ -1,0 +1,8 @@
+langchain
+langchain-openai
+langchain-chroma
+langchain-text-splitters
+chromadb
+openai
+pydantic
+python-dotenv
