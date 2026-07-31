@@ -1,0 +1,62 @@
+[
+    {
+        "question": "What is Amazon Redshift primarily designed for?",
+        "expected_documents": [
+            "redshift_fundamentals.md"
+        ]
+    },
+    {
+        "question": "What is the role of the leader node in Amazon Redshift?",
+        "expected_documents": [
+            "redshift_fundamentals.md"
+        ]
+    },
+    {
+        "question": "What is Massively Parallel Processing (MPP)?",
+        "expected_documents": [
+            "redshift_fundamentals.md"
+        ]
+    },
+    {
+        "question": "What is the purpose of a staging layer in an ETL pipeline?",
+        "expected_documents": [
+            "redshift_etl.md"
+        ]
+    },
+    {
+        "question": "What is the difference between a full load and an incremental load?",
+        "expected_documents": [
+            "redshift_etl.md"
+        ]
+    },
+    {
+        "question": "What is an idempotent ETL process?",
+        "expected_documents": [
+            "redshift_etl.md"
+        ]
+    },
+    {
+        "question": "Why is the COPY command recommended for loading data into Redshift?",
+        "expected_documents": [
+            "redshift_etl.md"
+        ]
+    },
+    {
+        "question": "What are the advantages of using Parquet files for data ingestion?",
+        "expected_documents": [
+            "redshift_etl.md"
+        ]
+    },
+    {
+        "question": "What is Change Data Capture (CDC)?",
+        "expected_documents": [
+            "redshift_etl.md"
+        ]
+    },
+    {
+        "question": "What are some best practices for designing a Redshift cluster?",
+        "expected_documents": [
+            "redshift_fundamentals.md"
+        ]
+    }
+]
