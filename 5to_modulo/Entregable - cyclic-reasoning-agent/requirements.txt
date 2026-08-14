@@ -1,0 +1,9 @@
+langchain
+langgraph
+langchain-groq
+langgraph-checkpoint-sqlite
+aiosqlite
+pydantic
+python-dotenv
+pytest
+pytest-asyncio

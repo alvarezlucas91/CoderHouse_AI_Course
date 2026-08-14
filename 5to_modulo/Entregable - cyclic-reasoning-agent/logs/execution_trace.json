@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-08-08T20:31:40.723432+00:00",
+  "thread_id": "iot_support_demo_01",
+  "input": "Tengo un Sensor-X200 que se desconecta cuando hay mucha humedad. Quiero saber cuál puede ser la causa y qué versión de firmware debería tener instalada.",
+  "messages": [
+    {
+      "type": "human",
+      "content": "Tengo un Sensor-X200 que se desconecta cuando hay mucha humedad. Quiero saber cuál puede ser la causa y qué versión de firmware debería tener instalada."
+    },
+    {
+      "type": "ai",
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_technical_knowledge",
+          "args": {
+            "limit": 1,
+            "query": "Sensor-X200 desconexión por humedad"
+          },
+          "id": "s9vj2hp50",
+          "type": "tool_call"
+        }
+      ]
+    },
+    {
+      "type": "tool",
+      "content": "[{\"id\": \"INC-001\", \"category\": \"connectivity\", \"device\": \"Sensor-X200\", \"title\": \"Pérdida de conexión en ambientes húmedos\", \"content\": \"El Sensor-X200 puede presentar desconexiones intermitentes cuando la humedad supera el 80%. El problema está relacionado con el módulo inalámbrico.\", \"information_status\": \"incomplete\", \"next_step\": \"Para determinar la solución y la versión recomendada, es necesario consultar la documentación de firmware del Sensor-X200.\"}]",
+      "tool_call_id": "s9vj2hp50",
+      "name": "search_technical_knowledge"
+    },
+    {
+      "type": "ai",
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_technical_knowledge",
+          "args": {
+            "limit": 1,
+            "query": "Sensor-X200 firmware humedad"
+          },
+          "id": "w1e4ftz43",
+          "type": "tool_call"
+        }
+      ]
+    },
+    {
+      "type": "tool",
+      "content": "[{\"id\": \"FW-002\", \"category\": \"firmware\", \"device\": \"Sensor-X200\", \"title\": \"Firmware recomendado para Sensor-X200\", \"content\": \"La versión de firmware 2.4.0 o superior corrige problemas de reconexión del módulo inalámbrico en ambientes con alta humedad.\", \"information_status\": \"complete\"}]",
+      "tool_call_id": "w1e4ftz43",
+      "name": "search_technical_knowledge"
+    },
+    {
+      "type": "ai",
+      "content": "La causa de la desconexión de tu Sensor-X200 cuando hay mucha humedad se debe a que el dispositivo puede presentar desconexiones intermitentes cuando la humedad supera el 80%, relacionado con el módulo inalámbrico. Para solucionar este problema, se recomienda instalar la versión de firmware 2.4.0 o superior, ya que corrige problemas de reconexión del módulo inalámbrico en ambientes con alta humedad."
+    }
+  ]
+}
