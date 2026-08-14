@@ -1,0 +1,89 @@
+[
+  {
+  "id": "INC-001",
+  "category": "connectivity",
+  "device": "Sensor-X200",
+  "title": "Pérdida de conexión en ambientes húmedos",
+  "content": "El Sensor-X200 puede presentar desconexiones intermitentes cuando la humedad supera el 80%. El problema está relacionado con el módulo inalámbrico.",
+  "information_status": "incomplete",
+  "next_step": "Para determinar la solución y la versión recomendada, es necesario consultar la documentación de firmware del Sensor-X200."
+ },
+  {
+  "id": "FW-002",
+  "category": "firmware",
+  "device": "Sensor-X200",
+  "title": "Firmware recomendado para Sensor-X200",
+  "content": "La versión de firmware 2.4.0 o superior corrige problemas de reconexión del módulo inalámbrico en ambientes con alta humedad.",
+  "information_status": "complete"
+ },
+  {
+    "id": "CFG-003",
+    "category": "configuration",
+    "device": "Sensor-X200",
+    "title": "Configuración de reconexión automática",
+    "content": "Después de actualizar el firmware del Sensor-X200, se recomienda configurar el intervalo de reconexión automática en 30 segundos."
+  },
+  {
+    "id": "BAT-004",
+    "category": "battery",
+    "device": "Sensor-X100",
+    "title": "Consumo elevado de batería",
+    "content": "El Sensor-X100 puede presentar un consumo elevado de batería cuando el intervalo de transmisión está configurado por debajo de 10 segundos. Para reducir el consumo se debe revisar la configuración de transmisión."
+  },
+  {
+    "id": "CFG-005",
+    "category": "configuration",
+    "device": "Sensor-X100",
+    "title": "Intervalo recomendado de transmisión",
+    "content": "Para instalaciones estándar del Sensor-X100 se recomienda utilizar un intervalo de transmisión de entre 30 y 60 segundos."
+  },
+  {
+    "id": "BAT-006",
+    "category": "battery",
+    "device": "Sensor-X100",
+    "title": "Vida útil esperada de batería",
+    "content": "Con un intervalo de transmisión de 60 segundos, la batería del Sensor-X100 tiene una duración estimada de aproximadamente 18 meses en condiciones normales de operación."
+  },
+  {
+    "id": "NET-007",
+    "category": "connectivity",
+    "device": "Gateway-G20",
+    "title": "Pérdida de conectividad después de cambiar de red",
+    "content": "El Gateway-G20 puede perder conectividad después de un cambio de red. Antes de reemplazar el dispositivo, se recomienda verificar la configuración DNS y la conectividad con la puerta de enlace."
+  },
+  {
+    "id": "CFG-008",
+    "category": "network",
+    "device": "Gateway-G20",
+    "title": "Configuración DNS recomendada",
+    "content": "El Gateway-G20 debe utilizar DNS automático o servidores DNS accesibles desde la red configurada. Una configuración DNS incorrecta puede impedir la comunicación con la plataforma IoT."
+  },
+  {
+    "id": "FW-009",
+    "category": "firmware",
+    "device": "Gateway-G20",
+    "title": "Firmware de estabilidad de red",
+    "content": "La versión 3.2.1 del firmware del Gateway-G20 mejora la recuperación automática de conectividad luego de interrupciones breves de red."
+  },
+  {
+    "id": "TEMP-010",
+    "category": "temperature",
+    "device": "Sensor-T300",
+    "title": "Lecturas incorrectas de temperatura",
+    "content": "El Sensor-T300 puede registrar valores de temperatura incorrectos cuando está instalado cerca de fuentes de calor o bajo exposición directa al sol. Se recomienda revisar primero la ubicación física del sensor."
+  },
+  {
+    "id": "CFG-011",
+    "category": "installation",
+    "device": "Sensor-T300",
+    "title": "Ubicación recomendada para instalación",
+    "content": "El Sensor-T300 debe instalarse en una zona ventilada, sin exposición directa al sol y al menos a un metro de fuentes de calor."
+  },
+  {
+    "id": "CAL-012",
+    "category": "calibration",
+    "device": "Sensor-T300",
+    "title": "Procedimiento de recalibración",
+    "content": "Si las lecturas del Sensor-T300 continúan siendo incorrectas después de revisar su instalación, se recomienda ejecutar el procedimiento de recalibración desde el panel de administración."
+  }
+]
