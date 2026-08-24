@@ -1,8 +1,7 @@
 # Hallazgos de observabilidad — Phoenix
 
 > Generado automáticamente. Abrir `http://localhost:6006` y filtrar el proyecto
-> `modulo-7-multiagente`. Para una URL compartible, publicar este archivo en Drive,
-> Notion o un repositorio y pegar aquí el enlace: **PENDIENTE**.
+> `modulo-7-multiagente`. Estos son los resultados de la demostración.
 
 ## Resultados
 
