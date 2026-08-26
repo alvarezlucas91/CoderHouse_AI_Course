@@ -1,0 +1,43 @@
+services:
+  redis:
+    image: redis:8.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 2s
+      retries: 20
+
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    ports:
+      - "6006:6006"
+    volumes:
+      - phoenix-data:/mnt/data
+
+  api:
+    build: .
+    environment:
+      REDIS_URL: redis://redis:6379
+      PHOENIX_COLLECTOR_ENDPOINT: http://phoenix:6006/v1/traces
+      PHOENIX_PROJECT_NAME: modulo-7-api-agente
+      CHROMA_PATH: /data/vectorstore
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../3er_modulo/Entregable/vectorstore:/seed/vectorstore:ro
+      - chroma-data:/data/vectorstore
+    depends_on:
+      redis:
+        condition: service_healthy
+      phoenix:
+        condition: service_started
+
+volumes:
+  redis-data:
+  phoenix-data:
+  chroma-data:
