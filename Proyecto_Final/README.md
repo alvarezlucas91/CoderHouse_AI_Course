@@ -22,6 +22,9 @@ críticas, API asíncrona, persistencia y trazabilidad.
 El siguiente diagrama representa el grafo ejecutado por LangGraph; no es una
 arquitectura futura ni una descripción conceptual.
 
+![Supervisor y agentes](evidence/02-supervisor-agents-graf.PNG)
+
+
 ```mermaid
 flowchart TD
     U[Usuario o proceso] --> API[FastAPI POST /v1/tasks]
@@ -161,6 +164,44 @@ El lote final reproducible está en
 Phoenix registra el árbol completo de spans, latencia, tokens y costo estimado de
 las llamadas al LLM. La evidencia final incluyó 725 spans y 23 trazas acumuladas,
 con spans específicos para Supervisor, agentes, Pinecone, BM25, HITL y workers.
+
+## Evidencia visual
+
+Todas las imágenes corresponden a ejecuciones reales del sistema local y están
+versionadas en [`evidence/`](evidence/).
+
+### Trazas del sistema
+
+Vista general del proyecto `redshift-intelligence` en Arize Phoenix:
+
+![Vista general de trazas en Arize Phoenix](evidence/01-overview-traces.PNG)
+
+### Supervisor y agentes especializados
+
+Árbol de ejecución con Supervisor, Research, Diagnosis, Optimization y sus
+transiciones dentro de LangGraph:
+
+![Árbol del Supervisor y agentes](evidence/02-supervisor-agents.PNG)
+
+### Recuperación híbrida: Pinecone y BM25
+
+El span `rag.hybrid_search` ejecuta los retrievers `retriever.pinecone` y
+`retriever.bm25`. Sus resultados se combinan mediante Reciprocal Rank Fusion:
+
+![Spans de RAG híbrido con Pinecone y BM25](evidence/03-rag-hybrid.PNG)
+
+### Aprobación humana y reanudación
+
+La traza muestra la reanudación persistida desde `HUMAN_APPROVAL` hasta `FINISH`:
+
+![Reanudación del flujo de aprobación humana](evidence/04-human-approval.PNG)
+
+### API profesional documentada
+
+FastAPI publica contratos de entrada y salida validados con Pydantic mediante
+OpenAPI/Swagger:
+
+![Documentación Swagger de la API](evidence/05-api-swagger.PNG)
 
 ## Persistencia y recuperación
 
