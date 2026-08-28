@@ -174,6 +174,12 @@ Vista general del proyecto `redshift-intelligence` en Arize Phoenix:
 
 ![Vista general de trazas en Arize Phoenix](evidence/01-overview-traces.PNG)
 
+> **Nota sobre los errores visibles:** esta vista general conserva ejecuciones de
+> estabilización afectadas por límites de cuota y validaciones de modelos externos.
+> Se incluyen deliberadamente porque demuestran que Phoenix captura recorridos
+> exitosos y fallos con su latencia y causa. Las siguientes capturas corresponden
+> a ejecuciones finales correctas del grafo, el RAG híbrido y la aprobación humana.
+
 ### Supervisor y agentes especializados
 
 Árbol de ejecución con Supervisor, Research, Diagnosis, Optimization y sus
