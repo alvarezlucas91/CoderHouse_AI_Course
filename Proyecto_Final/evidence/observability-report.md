@@ -41,6 +41,12 @@ La cantidad acumulada incluye las ejecuciones de estabilización previas al lote
 definitivo. Los cinco Job IDs de la tabla permiten localizar las trazas finales en
 el dashboard.
 
+La captura general conserva algunos errores de estabilización causados por límites
+de cuota y validaciones de modelos externos. No se ocultaron porque forman parte de
+la evidencia de observabilidad: Phoenix registró los fallos, su latencia y su causa.
+Las capturas específicas de Supervisor, RAG híbrido y HITL muestran ejecuciones
+finales correctas.
+
 ## Capturas requeridas para la entrega
 
 Desde <http://127.0.0.1:6006>, seleccionar el proyecto
