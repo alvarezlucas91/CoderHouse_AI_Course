@@ -1,0 +1,2 @@
+"""Redshift Intelligence application package."""
+
