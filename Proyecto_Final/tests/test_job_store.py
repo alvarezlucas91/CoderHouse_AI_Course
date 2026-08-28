@@ -16,6 +16,9 @@ class FakeRedis:
     async def set(self, name: str, value: str, *, ex: int | None = None) -> None:
         self.data[name] = value
 
+    async def ping(self) -> bool:
+        return True
+
     async def get(self, name: str) -> str | None:
         return self.data.get(name)
 
@@ -62,4 +65,3 @@ def test_store_rejects_invalid_terminal_transition() -> None:
             await store.update(record.id, status=JobStatus.RUNNING)
 
     asyncio.run(scenario())
-

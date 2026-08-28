@@ -4,7 +4,14 @@ from uuid import UUID, uuid4
 from fastapi import APIRouter, HTTPException, Request, status
 
 from app.persistence import InvalidJobTransition
-from app.schemas import ApprovalDecision, JobRecord, JobResponse, JobStatus, TaskRequest
+from app.schemas import (
+    ApprovalDecision,
+    JobRecord,
+    JobResponse,
+    JobStatus,
+    ServiceStatus,
+    TaskRequest,
+)
 
 
 router = APIRouter(prefix="/v1")
@@ -63,15 +70,14 @@ async def approve_task(
     return _public(job)
 
 
-@router.get("/health")
-async def health(request: Request) -> dict[str, str]:
+@router.get("/health", response_model=ServiceStatus)
+async def health(request: Request) -> ServiceStatus:
     await request.app.state.redis.ping()
-    return {"status": "healthy"}
+    return ServiceStatus(status="healthy")
 
 
-@router.get("/ready")
-async def ready(request: Request) -> dict[str, str]:
+@router.get("/ready", response_model=ServiceStatus)
+async def ready(request: Request) -> ServiceStatus:
     if not getattr(request.app.state, "worker_pool", None):
         raise HTTPException(status_code=503, detail="Workers are not ready")
-    return {"status": "ready"}
-
+    return ServiceStatus(status="ready")

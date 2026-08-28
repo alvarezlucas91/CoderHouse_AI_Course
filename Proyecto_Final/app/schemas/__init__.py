@@ -7,7 +7,15 @@ from .agents import (
     SupervisorDecision,
     ValidationResult,
 )
-from .api import ApprovalDecision, JobRecord, JobResponse, JobStatus, TaskRequest, TaskResult
+from .api import (
+    ApprovalDecision,
+    JobRecord,
+    JobResponse,
+    JobStatus,
+    ServiceStatus,
+    TaskRequest,
+    TaskResult,
+)
 from .rag import Evidence, RetrievalQuery, RetrievalResult
 
 __all__ = [
@@ -23,6 +31,7 @@ __all__ = [
     "RecommendationPlan",
     "RetrievalQuery",
     "RetrievalResult",
+    "ServiceStatus",
     "SupervisorDecision",
     "TaskRequest",
     "TaskResult",

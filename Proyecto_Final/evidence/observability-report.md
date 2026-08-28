@@ -2,7 +2,7 @@
 
 Fecha de ejecución: 2026-08-28  
 Proyecto Phoenix: `redshift-intelligence`  
-Dashboard local: <http://localhost:6006>
+Dashboard local: <http://127.0.0.1:6006>
 
 ## Resultado de las cinco pruebas
 
@@ -43,7 +43,7 @@ el dashboard.
 
 ## Capturas requeridas para la entrega
 
-Desde <http://localhost:6006>, seleccionar el proyecto
+Desde <http://127.0.0.1:6006>, seleccionar el proyecto
 `redshift-intelligence`, filtrar por el horario del lote final y guardar las
 capturas indicadas en [`README.md`](README.md). Las capturas son la única evidencia
 visual que debe realizarse manualmente desde el navegador.

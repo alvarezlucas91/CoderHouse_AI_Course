@@ -72,8 +72,8 @@ async def run(base_url: str, timeout: float, concurrency: int, output: Path) -> 
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run five concurrent end-to-end scenarios")
-    parser.add_argument("--base-url", default="http://localhost:8000")
+    parser = argparse.ArgumentParser(description="Run five end-to-end scenarios")
+    parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--timeout", type=float, default=180)
     parser.add_argument(
         "--concurrency",

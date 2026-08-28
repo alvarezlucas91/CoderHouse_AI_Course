@@ -15,27 +15,49 @@ críticas, API asíncrona, persistencia y trazabilidad.
 - [x] Grafo LangGraph con Supervisor y agentes especializados.
 - [x] Checkpointer Redis e interrupciones HITL.
 - [x] FastAPI, workers y persistencia de jobs.
-- [ ] Phoenix, Docker Compose y cinco pruebas end-to-end.
+- [x] Phoenix, Docker Compose y cinco pruebas end-to-end con evidencia.
 
-## Arquitectura objetivo
+## Grafo de agentes implementado
+
+El siguiente diagrama representa el grafo ejecutado por LangGraph; no es una
+arquitectura futura ni una descripción conceptual.
 
 ```mermaid
 flowchart TD
-    U[Usuario] --> API[FastAPI]
-    API --> S[Supervisor]
-    S --> R[Research Agent]
-    R --> PR[Pinecone]
-    R --> BM[BM25]
-    S --> D[Diagnostic Agent]
-    S --> O[Optimization Agent]
-    S --> V[Validation Agent]
-    V -->|Falta evidencia| R
-    V -->|Diagnóstico débil| D
-    V -->|Acción crítica| H[Human approval]
-    V -->|Validado| F[Respuesta con citas]
-    H -->|Aprobado| F
-    H -->|Rechazado| X[Respuesta sin ejecución]
+    U[Usuario o proceso] --> API[FastAPI POST /v1/tasks]
+    API --> Q[Worker asíncrono]
+    Q --> START((START))
+    START --> S[SUPERVISOR]
+
+    S -->|Falta evidencia| R[RESEARCH]
+    S -->|Falta diagnóstico| D[DIAGNOSE]
+    S -->|Falta plan| O[OPTIMIZE]
+    S -->|Falta validación| V[VALIDATE]
+    S -->|Plan riesgoso validado| H[HUMAN_APPROVAL]
+    S -->|Resultado validado| F[FINISH]
+
+    R --> HR[Hybrid RAG]
+    HR --> PC[Pinecone denso]
+    HR --> BM[BM25 disperso]
+    PC --> RRF[Fusión RRF]
+    BM --> RRF
+    RRF --> R
+
+    R --> S
+    D --> S
+    O --> S
+    V --> S
+
+    H -->|interrupt: espera decisión| PAUSA[(Checkpoint Redis)]
+    PAUSA -->|Command resume: aprobado| F
+    PAUSA -->|Command resume: rechazado| F
+    F --> END((END))
 ```
+
+El Supervisor propone la siguiente ruta, pero guardas deterministas impiden
+finalizar mientras falten evidencia, diagnóstico, recomendaciones o validación.
+Todos los nodos comparten el mismo `thread_id`, persistido por el checkpointer de
+LangGraph en Redis.
 
 ## Desarrollo
 
@@ -64,9 +86,12 @@ docker compose up --build
 
 Servicios disponibles:
 
-- Swagger/OpenAPI: <http://localhost:8000/docs>
-- Phoenix: <http://localhost:6006>
-- Redis: `localhost:6379`
+- Swagger/OpenAPI: <http://127.0.0.1:8000/docs>
+- Phoenix: <http://127.0.0.1:6006>
+- Redis: `127.0.0.1:6379`
+
+Si `localhost` está configurado correctamente también funciona, pero se documenta
+`127.0.0.1` para evitar problemas de resolución IPv4/IPv6 en Windows.
 
 La API usa un proceso Uvicorn porque la cola de trabajos vive dentro del proceso.
 Redis conserva jobs y checkpoints. Para escalar horizontalmente se debe reemplazar
@@ -91,18 +116,18 @@ la cola local por ARQ, Celery u otro broker distribuido.
 Crear y consultar una tarea:
 
 ```powershell
-$job = Invoke-RestMethod -Method Post http://localhost:8000/v1/tasks `
+$job = Invoke-RestMethod -Method Post http://127.0.0.1:8000/v1/tasks `
   -ContentType 'application/json' `
   -Body '{"query":"Diagnostica una consulta con queue time elevado"}'
 
-Invoke-RestMethod "http://localhost:8000/v1/tasks/$($job.id)"
+Invoke-RestMethod "http://127.0.0.1:8000/v1/tasks/$($job.id)"
 ```
 
 Reanudar una tarea en `WAITING_APPROVAL`:
 
 ```powershell
 Invoke-RestMethod -Method Post `
-  "http://localhost:8000/v1/tasks/$($job.id)/approval" `
+  "http://127.0.0.1:8000/v1/tasks/$($job.id)/approval" `
   -ContentType 'application/json' `
   -Body '{"approved":true,"comment":"Revisado por operaciones"}'
 ```
@@ -115,16 +140,27 @@ Pruebas locales:
 pytest -q
 ```
 
-Cinco ejecuciones concurrentes contra el sistema completo:
+Cinco ejecuciones end-to-end contra el sistema completo:
 
 ```powershell
 python load_test.py
 ```
 
+El runner admite `--concurrency 1..5`. El valor predeterminado es 1 para respetar
+cuotas gratuitas de tokens por minuto; puede aumentarse cuando el proveedor lo
+permita sin modificar el sistema.
+
 En Phoenix seleccionar el proyecto `redshift-intelligence` y comprobar los spans
 `worker.execute`, `agent.supervisor`, `agent.research`, `retriever.pinecone`,
 `retriever.bm25`, `agent.diagnosis`, `agent.optimization` y `agent.validation`.
 Las capturas requeridas se describen en [`evidence/README.md`](evidence/README.md).
+El lote final reproducible está en
+[`evidence/load-test-report.json`](evidence/load-test-report.json) y su análisis en
+[`evidence/observability-report.md`](evidence/observability-report.md).
+
+Phoenix registra el árbol completo de spans, latencia, tokens y costo estimado de
+las llamadas al LLM. La evidencia final incluyó 725 spans y 23 trazas acumuladas,
+con spans específicos para Supervisor, agentes, Pinecone, BM25, HITL y workers.
 
 ## Persistencia y recuperación
 

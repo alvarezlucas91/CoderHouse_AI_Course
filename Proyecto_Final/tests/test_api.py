@@ -41,5 +41,9 @@ def test_create_and_get_task() -> None:
                 assert fetched.status_code == 200
                 assert fetched.json()["status"] == "PENDING"
                 assert len(worker.enqueued) == 1
+                health = await client.get("/v1/health")
+                ready = await client.get("/v1/ready")
+                assert health.json() == {"status": "healthy"}
+                assert ready.json() == {"status": "ready"}
 
     asyncio.run(scenario())
