@@ -1,0 +1,48 @@
+{
+  "executed_at": "2026-08-28T03:22:35.694591+00:00",
+  "base_url": "http://localhost:8000",
+  "scenario_count": 5,
+  "concurrency": 1,
+  "elapsed_seconds": 773.61,
+  "tasks": [
+    {
+      "scenario": "Explica la función del leader node y cita la evidencia.",
+      "id": "8e9d57b9-72f0-4043-9e1f-3f839627b1ae",
+      "status": "DONE",
+      "has_result": true,
+      "error": null
+    },
+    {
+      "scenario": "Diagnostica una consulta con queue time alto y execution time normal.",
+      "id": "6a9cd564-f2e9-45b0-82c3-6f22f898ab29",
+      "status": "WAITING_APPROVAL",
+      "has_result": false,
+      "post_approval_status": "DONE",
+      "post_approval_has_result": true,
+      "error": null
+    },
+    {
+      "scenario": "¿Qué significa DS_BCAST_INNER y cómo debería investigarlo?",
+      "id": "46866f7a-1211-49a3-aabf-2929a758fdab",
+      "status": "DONE",
+      "has_result": true,
+      "error": null
+    },
+    {
+      "scenario": "Una carga COPY falló por datos inválidos: indica el procedimiento de diagnóstico.",
+      "id": "a05f84b5-fc2e-4fcf-b2fe-f2515d492420",
+      "status": "DONE",
+      "has_result": true,
+      "error": null
+    },
+    {
+      "scenario": "¿Cómo decido entre optimizar una consulta y aumentar la capacidad?",
+      "id": "bb6ea85d-5b3d-470f-92ec-c74b9695ec0d",
+      "status": "WAITING_APPROVAL",
+      "has_result": false,
+      "post_approval_status": "DONE",
+      "post_approval_has_result": true,
+      "error": null
+    }
+  ]
+}
