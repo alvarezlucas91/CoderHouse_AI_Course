@@ -22,8 +22,6 @@ críticas, API asíncrona, persistencia y trazabilidad.
 El siguiente diagrama representa el grafo ejecutado por LangGraph; no es una
 arquitectura futura ni una descripción conceptual.
 
-![Supervisor y agentes](evidence/02-supervisor-agents-graf.PNG)
-
 
 ```mermaid
 flowchart TD
